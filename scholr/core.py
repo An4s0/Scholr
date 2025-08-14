@@ -1,5 +1,5 @@
 from .utils import html_get
-from .parser import parse_scholar_profile
+from .parser import parse_scholar_profile, parse_publication_details
 
 GOOGLE_SCHOLAR_URL = "https://scholar.google.com"
 
@@ -32,3 +32,18 @@ def get_scholar_profile(profile: str) -> dict:
     profile_info["publications"] = all_pubs
 
     return profile_info
+
+def get_publication_details(publication: dict) -> dict:
+    # publication : publication url
+    if "scholar.google." not in publication:
+        print("Invalid publication URL")
+        return {}
+
+    html = html_get(publication)
+    if not html or "Please show you're not a robot" in html:
+        print("Blocked by Google Scholar or empty page")
+        return {}
+
+    publication_details = parse_publication_details(html)
+
+    return publication_details

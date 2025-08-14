@@ -17,7 +17,7 @@ It provides an easy way to retrieve:
 - Author profile information (name, affiliation, research interests, photo)  
 - Citation statistics (total citations, h-index, i10-index)  
 - Complete publication lists  
-- Publication details (title, authors, journal, volume, issue, pages, publisher, description, citations)  
+- Publication details (title, date, citations, link)
 
 Scholr is designed for simplicity, speed, and ease of integration into scripts or pipelines.  
 
@@ -88,14 +88,7 @@ Example output:
 {
   "title": "A Study on Machine Learning",
   "link": "https://scholar.google.com/...",
-  "authors": "John Doe, Jane Smith",
   "date": "2020/5/15",
-  "journal": "Journal of Example Research",
-  "volume": "12",
-  "issue": "3",
-  "pages": "101-120",
-  "publisher": "Example Publisher",
-  "description": "This study explores machine learning techniques and their applications...",
   "citations": "45"
 }
 ```

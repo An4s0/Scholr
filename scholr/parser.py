@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 
 def parse_scholar_profile(html: str) -> dict:
     soup = BeautifulSoup(html, 'html.parser')
-    
     profile_info = {}
 
      # Extracting the name
@@ -36,5 +35,20 @@ def parse_scholar_profile(html: str) -> dict:
         profile_info['h_index_since_2019'] = stats[3].text
         profile_info['i10_index_all'] = stats[4].text
         profile_info['i10_index_since_2019'] = stats[5].text
+
+    # Extracting publications
+    publications = []
+    rows = soup.select('tr.gsc_a_tr')
+    for row in rows:
+        title_tag = row.select_one('.gsc_a_at')
+        title = title_tag.text if title_tag else ""
+        link = "https://scholar.google.com" + title_tag['href'] if title_tag and title_tag.get('href') else None
+
+        publications.append({
+            "title": title,
+            "link": link,
+        })
+
+    profile_info["publications"] = publications
 
     return profile_info

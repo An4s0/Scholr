@@ -26,7 +26,7 @@ def parse_scholar_profile(html: str) -> dict:
     if img_tag and img_tag.get('src'):
         profile_info['photo_url'] = img_tag['src']
 
-    # Extracting statistics
+    # Extracting the statistics
     stats = soup.select('table#gsc_rsb_st td.gsc_rsb_std')
     if len(stats) >= 6:
         profile_info['citations_all'] = stats[0].text
@@ -36,7 +36,7 @@ def parse_scholar_profile(html: str) -> dict:
         profile_info['i10_index_all'] = stats[4].text
         profile_info['i10_index_since_2019'] = stats[5].text
 
-    # Extracting publications
+    # Extracting the publications
     publications = []
     rows = soup.select('tr.gsc_a_tr')
     for row in rows:
@@ -52,3 +52,24 @@ def parse_scholar_profile(html: str) -> dict:
     profile_info["publications"] = publications
 
     return profile_info
+
+def parse_publication_details(html: str) -> dict:
+    soup = BeautifulSoup(html, 'html.parser')
+    publication_info = {}
+
+    # Extracting the title
+    title_tag = soup.find('a', class_='gsc_oci_title_link')
+    publication_info['title'] = title_tag.text.strip() if title_tag else "No Title"
+
+    rows = soup.select('#gsc_oci_table .gs_scl')
+    if len(rows) >= 9:
+        # Extracting the date
+        publication_info['date']      = rows[1].select_one('.gsc_oci_value').text.strip()
+        
+        # Extracting the citations
+        citations_tag = rows[8].select_one('.gsc_oci_value a')
+        publication_info['citations'] = citations_tag.text.strip() if citations_tag else "0"
+
+    publication_info['link'] = "https://scholar.google.com" + title_tag['href'] if title_tag else None
+
+    return publication_info

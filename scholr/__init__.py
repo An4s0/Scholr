@@ -1,1 +1,1 @@
-from .core import get_scholar_profile
+from .core import get_scholar_profile, get_publication_details

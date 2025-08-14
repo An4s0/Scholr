@@ -13,5 +13,5 @@ def html_get(url: str) -> str:
     }
     response = requests.get(url, headers=Header)
     response.raise_for_status()
-    time.sleep(1)
+    time.sleep(0.2)
     return response.text

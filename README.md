@@ -7,4 +7,120 @@
 [![Issues](https://img.shields.io/github/issues/An4s0/scholr.svg)](https://github.com/An4s0/scholr/issues)
 
 
-Scholr is a minimal and developer-friendly Python tool designed to fetch structured academic data directly from Google Scholar. Whether you need publication titles, citation counts, or author info, Scholr makes scraping straightforward and accessible, with a clear focus on performance and simplicity.
+---
+
+## Overview
+
+**Scholr** is a lightweight, developer-friendly Python library for extracting structured academic data from Google Scholar.  
+It provides an easy way to retrieve:  
+
+- Author profile information (name, affiliation, research interests, photo)  
+- Citation statistics (total citations, h-index, i10-index)  
+- Complete publication lists  
+- Publication details (title, authors, journal, volume, issue, pages, publisher, description, citations)  
+
+Scholr is designed for simplicity, speed, and ease of integration into scripts or pipelines.  
+
+---
+
+## Installation
+
+```bash
+pip install scholr
+```
+
+---
+
+## Usage
+
+### Fetch an author profile
+
+```python
+from scholr import get_scholar_profile
+
+profile_url = "https://scholar.google.com/citations?user=EXAMPLE_ID"
+
+profile = get_scholar_profile(profile_url)
+
+print("Profile info:")
+print(profile)
+```
+
+Example output:
+
+```json
+{
+  "name": "John Doe",
+  "affiliation": "Department of Computer Science, Example University",
+  "interests": ["machine learning", "data mining"],
+  "photo_url": "https://scholar.googleusercontent.com/photos/example.jpg",
+  "citations_all": "1234",
+  "citations_since_2019": "987",
+  "h_index_all": "15",
+  "h_index_since_2019": "12",
+  "i10_index_all": "10",
+  "i10_index_since_2019": "8",
+  "publications": [
+    {"title": "A Study on Machine Learning", "link": "https://scholar.google.com/..." },
+    {"title": "Data Mining Techniques", "link": "https://scholar.google.com/..."}
+  ]
+}
+```
+
+---
+
+### Fetch publication details
+
+```python
+from scholr import get_publication_details
+
+publication_url = "https://scholar.google.com/citations?view_op=view_citation&user=EXAMPLE_ID&citation_for_view=EXAMPLE_CITATION"
+
+publication = get_publication_details(publication_url)
+
+print("Publication details:")
+print(publication)
+```
+
+Example output:
+
+```json
+{
+  "title": "A Study on Machine Learning",
+  "link": "https://scholar.google.com/...",
+  "authors": "John Doe, Jane Smith",
+  "date": "2020/5/15",
+  "journal": "Journal of Example Research",
+  "volume": "12",
+  "issue": "3",
+  "pages": "101-120",
+  "publisher": "Example Publisher",
+  "description": "This study explores machine learning techniques and their applications...",
+  "citations": "45"
+}
+```
+
+---
+
+## Example Test Script
+
+```python
+from scholr import get_scholar_profile, get_publication_details
+
+profile_url = "https://scholar.google.com/citations?user=EXAMPLE_ID"
+
+profile = get_scholar_profile(profile_url)
+print("Profile info:", profile)
+
+for pub in profile.get("publications", []):
+    publication = get_publication_details(pub.get("link"))
+    print("Publication details:", publication)
+```
+
+---
+
+## Notes
+
+- Scholr fetches **all publications** of a profile automatically using pagination.
+- Rate-limiting may occur if too many requests are sent in a short time.
+- This library uses only **BeautifulSoup**; no browser automation is required.

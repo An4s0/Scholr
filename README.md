@@ -17,7 +17,7 @@ It provides an easy way to retrieve:
 - Author profile information (name, affiliation, research interests, photo)  
 - Citation statistics (total citations, h-index, i10-index)  
 - Complete publication lists  
-- Publication details (title, date, citations, link)
+- Publication details (title, date, citations, url)
 
 Scholr is designed for simplicity, speed, and ease of integration into scripts or pipelines.  
 

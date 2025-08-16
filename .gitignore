@@ -3,3 +3,8 @@
 
 # Python bytecode files
 __pycache__/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/

@@ -21,10 +21,10 @@ def parse_scholar_profile(html: str) -> dict:
     interests = [a.text for a in soup.select('#gsc_prf_int a')]
     profile_info['interests'] = interests
 
-    # Extracting the profile image URL
-    img_tag = soup.find('img', id='gsc_prf_pup-img')
-    if img_tag and img_tag.get('src'):
-        profile_info['photo_url'] = img_tag['src']
+    # Extracting the profile photo URL
+    photo_tag = soup.find('img', id='gsc_prf_pup-img')
+    if photo_tag and photo_tag.get('src'):
+        profile_info['photo_url'] = photo_tag['src']
 
     # Extracting the statistics
     stats = soup.select('table#gsc_rsb_st td.gsc_rsb_std')
@@ -64,7 +64,7 @@ def parse_publication_details(html: str) -> dict:
     rows = soup.select('#gsc_oci_table .gs_scl')
     if len(rows) >= 9:
         # Extracting the date
-        publication_info['date']      = rows[1].select_one('.gsc_oci_value').text.strip()
+        publication_info['date'] = rows[1].select_one('.gsc_oci_value').text.strip()
         
         # Extracting the citations
         citations_tag = rows[8].select_one('.gsc_oci_value a')

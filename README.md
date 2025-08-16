@@ -38,9 +38,9 @@ pip install scholr
 ```python
 from scholr import get_scholar_profile
 
-profile_url = "https://scholar.google.com/citations?user=EXAMPLE_ID"
+user_id = "EXAMPLE_ID"
 
-profile = get_scholar_profile(profile_url)
+profile = get_scholar_profile(user_id)
 
 print("Profile info:")
 print(profile)
@@ -61,8 +61,8 @@ Example output:
   "i10_index_all": "10",
   "i10_index_since_2019": "8",
   "publications": [
-    {"title": "A Study on Machine Learning", "link": "https://scholar.google.com/..." },
-    {"title": "Data Mining Techniques", "link": "https://scholar.google.com/..."}
+    {"title": "A Study on Machine Learning", "url": "https://scholar.google.com/..." },
+    {"title": "Data Mining Techniques", "url": "https://scholar.google.com/..."}
   ]
 }
 ```
@@ -87,7 +87,7 @@ Example output:
 ```json
 {
   "title": "A Study on Machine Learning",
-  "link": "https://scholar.google.com/...",
+  "url": "https://scholar.google.com/...",
   "date": "2020/5/15",
   "citations": "45"
 }
@@ -106,7 +106,7 @@ profile = get_scholar_profile(profile_url)
 print("Profile info:", profile)
 
 for pub in profile.get("publications", []):
-    publication = get_publication_details(pub.get("link"))
+    publication = get_publication_details(pub.get("url"))
     print("Publication details:", publication)
 ```
 

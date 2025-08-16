@@ -42,11 +42,11 @@ def parse_scholar_profile(html: str) -> dict:
     for row in rows:
         title_tag = row.select_one('.gsc_a_at')
         title = title_tag.text if title_tag else ""
-        link = "https://scholar.google.com" + title_tag['href'] if title_tag and title_tag.get('href') else None
+        url = "https://scholar.google.com" + title_tag['href'] if title_tag and title_tag.get('href') else None
 
         publications.append({
             "title": title,
-            "link": link,
+            "url": url,
         })
 
     profile_info["publications"] = publications
@@ -70,6 +70,6 @@ def parse_publication_details(html: str) -> dict:
         citations_tag = rows[8].select_one('.gsc_oci_value a')
         publication_info['citations'] = citations_tag.text.strip() if citations_tag else "0"
 
-    publication_info['link'] = "https://scholar.google.com" + title_tag['href'] if title_tag else None
+    publication_info['url'] = "https://scholar.google.com" + title_tag['href'] if title_tag else None
 
     return publication_info

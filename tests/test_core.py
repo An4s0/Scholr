@@ -5,11 +5,10 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from scholr import get_scholar_profile, get_publication_details
 
-profile_id = "your_profile_id"
-profile_url = "your_profile_url"
+user_id = "your_user_id"
 
 def test_get_scholar_profile():
-    profile = get_scholar_profile(profile_url)
+    profile = get_scholar_profile(user_id)
 
     print("Profile basic information:")
     print(profile)

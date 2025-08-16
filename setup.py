@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='scholr',
-    version='0.1.0',
+    version='0.2.0',
     author='Anas AlMutary',
     author_email='me@ianas.me',
     description='A lightweight scraper for Google Scholar',

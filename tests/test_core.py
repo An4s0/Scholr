@@ -24,4 +24,4 @@ if __name__ == "__main__":
     profile = test_get_scholar_profile()
 
     for pub in profile.get("publications", []):
-        test_get_publication_details(pub.get("link"))
+        test_get_publication_details(pub.get("url"))

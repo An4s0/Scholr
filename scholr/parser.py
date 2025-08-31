@@ -70,6 +70,6 @@ def parse_publication_details(html: str) -> dict:
         citations_tag = rows[8].select_one('.gsc_oci_value a')
         publication_info['citations'] = citations_tag.text.strip() if citations_tag else "0"
 
-    publication_info['url'] = "https://scholar.google.com" + title_tag['href'] if title_tag else None
+    publication_info['url'] = title_tag['href'] if title_tag else None
 
     return publication_info
